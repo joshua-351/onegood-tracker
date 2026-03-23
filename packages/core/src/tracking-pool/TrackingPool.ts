@@ -184,7 +184,7 @@ export class TrackingPool implements ITrackingPool {
       description,
       location,
       eventTime,
-      createdAt: DateTime.fromISO(now),
+      createdAt: DateTime.fromISO(now!),
     };
   }
 
