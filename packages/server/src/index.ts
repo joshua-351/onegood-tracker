@@ -120,7 +120,7 @@ async function main(): Promise<void> {
   // Tracking pool REST API
   app.use(
     "/tracking-pool",
-    createTrackingPoolRouter({ db, authSecret: AUTH_SECRET })
+    createTrackingPoolRouter({ db: db as any, authSecret: AUTH_SECRET })
   );
 
   // GraphQL endpoint
@@ -148,7 +148,7 @@ async function main(): Promise<void> {
   });
 
   // Initialize scheduler
-  const scheduler = new Scheduler({ db, carrierRegistry, wooCommerceSync });
+  const scheduler = new Scheduler({ db: db as any, carrierRegistry, wooCommerceSync });
   scheduler.start();
 
   // Graceful shutdown

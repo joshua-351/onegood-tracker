@@ -14,7 +14,7 @@
     "@apollo/server": "^4.7.0",
     "@delivery-tracker/api": "workspace:*",
     "@delivery-tracker/core": "workspace:*",
-    "better-sqlite3": "^8.0.0",
+    "better-sqlite3": "^9.4.3",
     "express": "^4.18.2",
     "luxon": "^3.4.0",
     "node-cron": "^3.0.3",
