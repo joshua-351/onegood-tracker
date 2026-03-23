@@ -1,4 +1,4 @@
-import { apiRootLogger } from "../logger";
+import { rootLogger } from "../logger";
 
 export interface WooCommerceConfig {
   shopDomain: string;
@@ -29,7 +29,7 @@ export class WooCommerceSync {
   ): Promise<boolean> {
     const config = this.getConfig(shopDomain);
     if (!config) {
-      apiRootLogger.error("WooCommerce config not found", { shopDomain });
+      rootLogger.error("WooCommerce config not found", { shopDomain });
       return false;
     }
 
@@ -52,7 +52,7 @@ export class WooCommerceSync {
 
       if (!response.ok) {
         const errorText = await response.text();
-        apiRootLogger.error("Failed to update WooCommerce order status", {
+        rootLogger.error("Failed to update WooCommerce order status", {
           orderId,
           status,
           shopDomain,
@@ -62,14 +62,14 @@ export class WooCommerceSync {
         return false;
       }
 
-      apiRootLogger.info("WooCommerce order status updated", {
+      rootLogger.info("WooCommerce order status updated", {
         orderId,
         status,
         shopDomain,
       });
       return true;
     } catch (error) {
-      apiRootLogger.error("Error updating WooCommerce order status", {
+      rootLogger.error("Error updating WooCommerce order status", {
         orderId,
         status,
         shopDomain,
@@ -85,7 +85,7 @@ export class WooCommerceSync {
   ): Promise<string | null> {
     const config = this.getConfig(shopDomain);
     if (!config) {
-      apiRootLogger.error("WooCommerce config not found", { shopDomain });
+      rootLogger.error("WooCommerce config not found", { shopDomain });
       return null;
     }
 
@@ -106,7 +106,7 @@ export class WooCommerceSync {
       );
 
       if (!response.ok) {
-        apiRootLogger.error("Failed to get WooCommerce order status", {
+        rootLogger.error("Failed to get WooCommerce order status", {
           orderId,
           shopDomain,
           statusCode: response.status,
@@ -117,7 +117,7 @@ export class WooCommerceSync {
       const order = await response.json() as WooCommerceOrderStatus;
       return order.status;
     } catch (error) {
-      apiRootLogger.error("Error getting WooCommerce order status", {
+      rootLogger.error("Error getting WooCommerce order status", {
         orderId,
         shopDomain,
         error,

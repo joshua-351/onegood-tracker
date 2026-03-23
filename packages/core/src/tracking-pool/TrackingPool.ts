@@ -43,10 +43,15 @@ export interface TrackingPoolFilter {
   shopDomain?: string;
 }
 
+export interface Statement {
+  run(...params: any): { lastInsertRowid: number; changes: number };
+  get<T>(...params: any): T | undefined;
+  all<T>(...params: any): T[];
+}
+
 export interface IDatabase {
-  run(sql: string, params?: any): this;
-  get<T>(sql: string, params?: any): T | undefined;
-  all<T>(sql: string, params?: any): T[];
+  prepare(sql: string): Statement;
+  exec(sql: string): void;
 }
 
 export interface ITrackingPool {
