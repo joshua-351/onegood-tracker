@@ -2,6 +2,10 @@ import * as winston from "winston";
 import { logger as coreLogger } from "@delivery-tracker/core";
 import { DateTime } from "luxon";
 
+const serverRootLogger: winston.Logger = coreLogger.rootLogger.child({
+  module: "server",
+});
+
 function initLogger(): void {
   coreLogger.rootLogger.format = winston.format.combine(
     winston.format.json({
@@ -33,4 +37,4 @@ function initLogger(): void {
   coreLogger.rootLogger.add(new winston.transports.Console());
 }
 
-export { initLogger };
+export { initLogger, serverRootLogger };
